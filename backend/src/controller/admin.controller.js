@@ -40,7 +40,7 @@ export const createSong = async (req, res, next) => {
     await song.save();
     // if song belongs to album, update the album's songs array
     if (albumId) {
-      await Album.findById(albumId, {
+      await Album.findByIdAndUpdate(albumId, {
         $push: { songs: song._id },
       });
     }
@@ -56,7 +56,17 @@ export const deleteSong = async (req, res, next) => {
     const { id } = req.params;
 
     const song = await Song.findById(id);
+    // if song belong to an album update the album's songs array
+    if (song.albumId) {
+      await Album.findByIdAndUpdate(song.albumId, {
+        $pull: { songs: song._id },
+      });
+    }
 
-    //  if song belong to any album, update the album
-  } catch (error) {}
+    await Song.findByIdAndDelete(id);
+    res.status(200).json({ message: "Song deleted successfully" });
+  } catch (error) {
+    console.log("Error in deleting song", error);
+    next(error);
+  }
 };
