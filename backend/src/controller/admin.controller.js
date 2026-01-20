@@ -1,5 +1,19 @@
+import cloudinary from "../lib/cloudinary.js";
 import { Album } from "../models/album.model.js";
 import { Song } from "../models/song.model.js";
+
+// helper function for cloudinary upload
+const uploadToCloudinary = async (file) => {
+  try {
+    const result = await cloudinary.uploader.upload(file.tempFilePath, {
+      resource_type: "auto",
+    });
+    return result.secure_url;
+  } catch (error) {
+    console.log("Error in uploadToCloudinary function", error);
+    throw new Error("Error uploading to cloudinary");
+  }
+};
 
 export const createSong = async (req, res, next) => {
   try {
@@ -10,6 +24,9 @@ export const createSong = async (req, res, next) => {
     const { title, artist, albumId, duration } = req.body;
     const audioFile = req.files.audioFile;
     const imageFile = req.files.imageFile;
+
+    const audioUrl = await uploadToCloudinary(audioFile);
+    const imageUrl = await uploadToCloudinary(imageFile);
 
     const song = new Song({
       title,
@@ -32,4 +49,14 @@ export const createSong = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const deleteSong = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const song = await Song.findById(id);
+
+    //  if song belong to any album, update the album
+  } catch (error) {}
 };
