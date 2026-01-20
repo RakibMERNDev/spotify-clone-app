@@ -1,16 +1,16 @@
-import express from "express";
-import dotenv from "dotenv";
-import { connectDB } from "./lib/db.js";
 import { clerkMiddleware } from "@clerk/express";
+import dotenv from "dotenv";
+import express from "express";
 import fileUpload from "express-fileupload";
 import path from "path";
 
-import userRoutes from "./routes/user.route.js";
-import authRoutes from "./routes/auth.route.js";
+import { connectDB } from "./lib/db.js";
 import adminRoutes from "./routes/admin.route.js";
-import songRoutes from "./routes/song.route.js";
 import albumRoutes from "./routes/album.route.js";
+import authRoutes from "./routes/auth.route.js";
+import songRoutes from "./routes/song.route.js";
 import statRoutes from "./routes/stat.route.js";
+import userRoutes from "./routes/user.route.js";
 
 dotenv.config();
 const __dirname = path.resolve();
