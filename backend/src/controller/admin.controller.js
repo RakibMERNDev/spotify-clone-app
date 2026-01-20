@@ -1,3 +1,3 @@
-export const getAdmin = async (req, res) =>{
+export const createSong = async (req, res) =>{
     res.send('admin route with get method')
 }
