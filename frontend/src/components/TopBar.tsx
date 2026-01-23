@@ -1,7 +1,7 @@
 import { SignedIn, SignedOut, SignOutButton } from "@clerk/clerk-react";
 import { LayoutDashboardIcon } from "lucide-react";
 import { Link } from "react-router";
-import SignInOauthButtons from "../SignInOauthButtons";
+import SignInOauthButtons from "./SignInOauthButtons";
 
 const TopBar = () => {
   const isAdmin = false;
@@ -10,19 +10,16 @@ const TopBar = () => {
       <div className="flex gap-2 items-center">Spotify</div>
       <div className="flex items-center gap-4">
         {isAdmin && (
-          <Link
-            to="/admin"
-           
-          >
-            <LayoutDashboardIcon className="size-4 mr-2"/>
+          <Link to="/admin">
+            <LayoutDashboardIcon className="size-4 mr-2" />
             Admin Dashboard
           </Link>
         )}
         <SignedIn>
-            <SignOutButton/>
+          <SignOutButton />
         </SignedIn>
         <SignedOut>
-            <SignInOauthButtons />
+          <SignInOauthButtons />
         </SignedOut>
       </div>
     </div>
