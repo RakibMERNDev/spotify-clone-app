@@ -1,8 +1,7 @@
 import { SignedIn, SignedOut, SignOutButton } from "@clerk/clerk-react";
 import { LayoutDashboardIcon } from "lucide-react";
-
+import { Link } from "react-router";
 import SignInOauthButtons from "./SignInOauthButtons";
-import { Link } from "react-router-dom";
 
 const TopBar = () => {
   const isAdmin = false;

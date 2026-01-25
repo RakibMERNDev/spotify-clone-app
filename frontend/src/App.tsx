@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router";
 import HomePage from "./pages/home/HomePage";
-
+import AuthCallBackPage from "./pages/auth-callback/AuthCallBackPage";
 import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
-import AuthCallbackPage from "./pages/auth-callback/AuthCallbackPage";
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
             />
           }
         />
-        <Route path="/auth-callback" element={<AuthCallbackPage />} />
+        <Route path="/auth-callback" element={<AuthCallBackPage />} />
       </Routes>
     </>
   );
